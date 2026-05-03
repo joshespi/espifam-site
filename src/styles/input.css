@@ -1,0 +1,97 @@
+@import "tailwindcss";
+
+@source "../**/*.html";
+@source "../js/*.js";
+
+/* Per-member accent palette. Set via data-member on <body> (or any wrapper). */
+[data-member="josh"]   { --accent: #dc2626; --accent-soft: #7f1d1d; }
+[data-member="sarah"]  { --accent: #38bdf8; --accent-soft: #075985; }
+[data-member="xander"] { --accent: #16a34a; --accent-soft: #14532d; }
+[data-member="odin"]   { --accent: #facc15; --accent-soft: #713f12; }
+[data-member="family"] { --accent: #ef4444; --accent-soft: #7f1d1d; }
+
+@layer base {
+  html { scroll-behavior: smooth; }
+
+  body {
+    @apply bg-zinc-950 text-zinc-100 min-h-screen flex flex-col;
+    font-family: ui-sans-serif, system-ui, -apple-system, sans-serif;
+  }
+  body[data-theme="light"] {
+    @apply bg-zinc-50 text-zinc-900;
+  }
+
+  h1 { @apply text-4xl md:text-5xl font-extrabold tracking-tight; }
+  h2 { @apply text-2xl md:text-3xl font-bold; }
+  h3 { @apply text-xl md:text-2xl font-semibold; }
+
+  a:not(.btn):not(.member-card):not(.nav-link) {
+    @apply underline decoration-1 underline-offset-2 transition;
+    color: var(--accent, #f87171);
+  }
+  a:not(.btn):not(.member-card):not(.nav-link):hover { filter: brightness(1.1); }
+}
+
+@layer components {
+  .container-page { @apply max-w-5xl mx-auto px-4 py-8 w-full; }
+
+  .nav-link {
+    @apply text-zinc-400 hover:text-zinc-100 transition-colors no-underline text-sm font-medium;
+  }
+  body[data-theme="light"] .nav-link {
+    @apply text-zinc-600 hover:text-zinc-900;
+  }
+
+  .member-card {
+    @apply rounded-2xl p-6 transition-transform hover:scale-[1.02] block no-underline;
+    background: color-mix(in srgb, var(--accent) 10%, rgb(24 24 27));
+    border: 1px solid color-mix(in srgb, var(--accent) 35%, transparent);
+  }
+  body[data-theme="light"] .member-card {
+    background: color-mix(in srgb, var(--accent) 8%, white);
+    border: 1px solid color-mix(in srgb, var(--accent) 45%, transparent);
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg px-5 py-2.5 font-semibold transition no-underline;
+    background: var(--accent, #b91c1c);
+    color: #0a0a0a;
+  }
+  .btn:hover { filter: brightness(1.1); }
+
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg px-5 py-2.5 font-semibold transition no-underline border;
+    border-color: color-mix(in srgb, var(--accent) 50%, transparent);
+    color: var(--accent);
+    background: transparent;
+  }
+  .btn-ghost:hover {
+    background: color-mix(in srgb, var(--accent) 15%, transparent);
+  }
+
+  .pill {
+    @apply inline-block rounded-full px-3 py-1 text-xs font-semibold no-underline;
+    background: color-mix(in srgb, var(--accent) 25%, transparent);
+    color: var(--accent);
+  }
+
+  .avatar {
+    @apply rounded-full overflow-hidden flex items-center justify-center font-extrabold;
+    background: color-mix(in srgb, var(--accent) 25%, rgb(39 39 42));
+    color: var(--accent);
+    width: 88px;
+    height: 88px;
+    font-size: 2rem;
+  }
+  .avatar-lg { width: 128px; height: 128px; font-size: 2.75rem; }
+
+  /* Rainbow puzzle-piece motif element. Used as a small awareness flair. */
+  .puzzle-rainbow {
+    @apply inline-block align-middle;
+    background: conic-gradient(from 180deg, #ef4444, #f59e0b, #eab308, #22c55e, #3b82f6, #8b5cf6, #ef4444);
+    -webkit-mask: url("/assets/puzzle.svg") center/contain no-repeat;
+    mask: url("/assets/puzzle.svg") center/contain no-repeat;
+    width: 1.25em;
+    height: 1.25em;
+  }
+}

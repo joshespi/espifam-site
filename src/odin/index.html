@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Ode's · espifam</title>
+  <meta name="description" content="Our oldest. Our heart." />
+  <meta property="og:title" content="Ode's · espifam" />
+  <meta property="og:description" content="Our oldest. Our heart." />
+  <link rel="stylesheet" href="/styles.css" />
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
+</head>
+<body data-member="odin">
+  <header class="container-page flex items-center justify-between !py-6">
+    <a href="/" class="nav-link !text-zinc-100 !text-base font-bold">espifam</a>
+    <nav class="flex items-center gap-5">
+      <a href="/josh/" class="nav-link">Espi</a>
+      <a href="/sarah/" class="nav-link">Skys</a>
+      <a href="/xander/" class="nav-link">Xander</a>
+      <a href="/odin/" class="nav-link !text-zinc-100">Ode's</a>
+    </nav>
+  </header>
+
+  <main class="container-page flex-1">
+    <section class="flex flex-col md:flex-row items-center md:items-start gap-8 py-8">
+      <div class="avatar avatar-lg shrink-0"><img src="/assets/avatars/odin.png" alt="" class="w-full h-full object-cover" /></div>
+      <div class="flex-1 text-center md:text-left">
+        <p class="pill mb-3">our oldest</p>
+        <h1 class="mb-2">Ode's</h1>
+        <p class="text-zinc-400 mb-6">non-verbal · most affected · most loved</p>
+        <p class="text-zinc-300 leading-relaxed mb-4 max-w-2xl">
+          Odin doesn't speak with words, but he's the loudest part of our family.
+          He loves SpongeBob and Mickey Mouse and the people who love him back.
+        </p>
+        <p class="text-zinc-300 leading-relaxed mb-8 max-w-2xl">
+          Autism is more present in our home because of him, and we wouldn't be
+          the family we are without him.
+        </p>
+
+        <div class="flex flex-wrap items-center gap-3 justify-center md:justify-start text-zinc-400 text-sm">
+          <span class="puzzle-rainbow"></span>
+          <span>autism awareness — every day, in this house</span>
+        </div>
+
+        <figure class="mt-6 inline-flex flex-col items-center gap-1.5">
+          <img src="/assets/avatars-roblox/roblox-odin.PNG" alt="Ode's as a Roblox character"
+               data-lightbox
+               class="w-24 h-24 rounded-xl object-cover ring-1 ring-zinc-700 cursor-zoom-in" />
+          <figcaption class="text-xs text-zinc-500">made by Xander · Roblox</figcaption>
+        </figure>
+      </div>
+    </section>
+  </main>
+
+  <footer class="container-page !py-6 border-t border-zinc-800 mt-12">
+    <div class="flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-zinc-500">
+      <div>
+        © <span id="year">2026</span> espifam.com ·
+        <a href="https://joshespi.com" class="!text-zinc-400 hover:!text-zinc-200" target="_blank" rel="noopener">joshespi.com</a>
+      </div>
+      <button data-theme-toggle
+              class="text-zinc-400 hover:text-zinc-100 transition-colors text-xs uppercase tracking-wider">
+        toggle theme
+      </button>
+    </div>
+  </footer>
+
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+  <script src="/js/theme-toggle.js"></script>
+  <script src="/js/lightbox.js"></script>
+</body>
+</html>

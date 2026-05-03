@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Skys · espifam</title>
+  <meta name="description" content="Skys — captain of the Espi crew, dragon enthusiast." />
+  <meta property="og:title" content="Skys · espifam" />
+  <meta property="og:description" content="Skys — captain of the Espi crew, dragon enthusiast." />
+  <link rel="stylesheet" href="/styles.css" />
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
+</head>
+<body data-member="sarah">
+  <header class="container-page flex items-center justify-between !py-6">
+    <a href="/" class="nav-link !text-zinc-100 !text-base font-bold">espifam</a>
+    <nav class="flex items-center gap-5">
+      <a href="/josh/" class="nav-link">Espi</a>
+      <a href="/sarah/" class="nav-link !text-zinc-100">Skys</a>
+      <a href="/xander/" class="nav-link">Xander</a>
+      <a href="/odin/" class="nav-link">Ode's</a>
+    </nav>
+  </header>
+
+  <main class="container-page flex-1">
+    <section class="flex flex-col md:flex-row items-center md:items-start gap-8 py-8">
+      <div class="avatar avatar-lg shrink-0"><img src="/assets/avatars/mom.png" alt="" class="w-full h-full object-cover" /></div>
+      <div class="flex-1 text-center md:text-left">
+        <p class="pill mb-3">mom</p>
+        <h1 class="mb-2">Skys 🐉</h1>
+        <p class="text-zinc-400 mb-6">captain of this crew · dragon enthusiast</p>
+        <p class="text-zinc-300 leading-relaxed mb-4 max-w-2xl">
+          The one keeping the rest of us in line. Three Espis on the spectrum, one of her —
+          she does the math every day and keeps showing up for it.
+        </p>
+        <p class="text-zinc-300 leading-relaxed mb-8 max-w-2xl">
+          Whatever creative thing she lands on next, this is where it'll show up.
+        </p>
+
+        <div class="flex flex-wrap gap-3 justify-center md:justify-start">
+          <span class="btn-ghost cursor-default opacity-70">more soon</span>
+        </div>
+
+        <figure class="mt-6 inline-flex flex-col items-center gap-1.5">
+          <img src="/assets/avatars-roblox/roblox-mom.PNG" alt="Skys as a Roblox character"
+               data-lightbox
+               class="w-24 h-24 rounded-xl object-cover ring-1 ring-zinc-700 cursor-zoom-in" />
+          <figcaption class="text-xs text-zinc-500">made by Xander · Roblox</figcaption>
+        </figure>
+      </div>
+    </section>
+  </main>
+
+  <footer class="container-page !py-6 border-t border-zinc-800 mt-12">
+    <div class="flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-zinc-500">
+      <div>
+        © <span id="year">2026</span> espifam.com ·
+        <a href="https://joshespi.com" class="!text-zinc-400 hover:!text-zinc-200" target="_blank" rel="noopener">joshespi.com</a>
+      </div>
+      <button data-theme-toggle
+              class="text-zinc-400 hover:text-zinc-100 transition-colors text-xs uppercase tracking-wider">
+        toggle theme
+      </button>
+    </div>
+  </footer>
+
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+  <script src="/js/theme-toggle.js"></script>
+  <script src="/js/lightbox.js"></script>
+</body>
+</html>

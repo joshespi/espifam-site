@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Espi Family</title>
+  <meta name="description" content="The Espi family — what we're making, where to find us." />
+  <meta property="og:title" content="Espi Family" />
+  <meta property="og:description" content="The Espi family — what we're making, where to find us." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://espifam.com/" />
+  <link rel="stylesheet" href="/styles.css" />
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
+</head>
+<body data-member="family">
+  <header class="container-page flex items-center justify-between !py-6">
+    <a href="/" class="nav-link !text-zinc-100 !text-base font-bold">espifam</a>
+    <nav class="flex items-center gap-5">
+      <a href="/josh/" class="nav-link">Espi</a>
+      <a href="/sarah/" class="nav-link">Skys</a>
+      <a href="/xander/" class="nav-link">Xander</a>
+      <a href="/odin/" class="nav-link">Ode's</a>
+    </nav>
+  </header>
+
+  <main class="container-page flex-1">
+    <!-- Hero -->
+    <section class="text-center py-12 md:py-20">
+      <p class="pill mb-6">a family of four</p>
+      <h1 class="mb-6">We're the Espis.</h1>
+      <p class="text-lg md:text-xl text-zinc-300 max-w-2xl mx-auto mb-8 leading-relaxed">
+        Three of us are on the autism spectrum — Odin, our oldest, profoundly so —
+        and one of us keeps the rest of us in line.
+        This is where we point to the things we make.
+      </p>
+      <a href="https://www.youtube.com/@EspiFamily70"
+         class="btn"
+         target="_blank" rel="noopener">
+        Watch us on YouTube
+        <span aria-hidden="true">→</span>
+      </a>
+    </section>
+
+    <!-- Member cards -->
+    <section class="py-8">
+      <h2 class="text-center mb-10">The crew</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+        <a href="/josh/" class="member-card" data-member="josh">
+          <div class="flex items-center gap-5">
+            <div class="avatar"><img src="/assets/avatars/josh.png" alt="" class="w-full h-full object-cover" /></div>
+            <div>
+              <div class="text-xs text-zinc-400 uppercase tracking-wider mb-1">dad</div>
+              <div class="text-xl font-bold">Espi</div>
+              <div class="text-sm text-zinc-400">gaming, building things</div>
+            </div>
+          </div>
+        </a>
+
+        <a href="/sarah/" class="member-card" data-member="sarah">
+          <div class="flex items-center gap-5">
+            <div class="avatar"><img src="/assets/avatars/mom.png" alt="" class="w-full h-full object-cover" /></div>
+            <div>
+              <div class="text-xs text-zinc-400 uppercase tracking-wider mb-1">mom</div>
+              <div class="text-xl font-bold">Skys</div>
+              <div class="text-sm text-zinc-400">captain of this crew</div>
+            </div>
+          </div>
+        </a>
+
+        <a href="/xander/" class="member-card" data-member="xander">
+          <div class="flex items-center gap-5">
+            <div class="avatar"><img src="/assets/avatars/xander.png" alt="" class="w-full h-full object-cover" /></div>
+            <div>
+              <div class="text-xs text-zinc-400 uppercase tracking-wider mb-1">younger son</div>
+              <div class="text-xl font-bold">xanderman_luigi</div>
+              <div class="text-sm text-zinc-400">Luigi, gaming, streams incoming</div>
+            </div>
+          </div>
+        </a>
+
+        <a href="/odin/" class="member-card" data-member="odin">
+          <div class="flex items-center gap-5">
+            <div class="avatar"><img src="/assets/avatars/odin.png" alt="" class="w-full h-full object-cover" /></div>
+            <div>
+              <div class="text-xs text-zinc-400 uppercase tracking-wider mb-1">oldest</div>
+              <div class="text-xl font-bold">Ode's</div>
+              <div class="text-sm text-zinc-400">our heart</div>
+            </div>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <!-- Neurodiversity callout -->
+    <section class="py-12 mt-8 text-center">
+      <div class="inline-flex items-center gap-3 mb-3">
+        <span class="puzzle-rainbow"></span>
+        <span class="text-sm uppercase tracking-widest text-zinc-400">neurodiversity at home</span>
+        <span class="puzzle-rainbow"></span>
+      </div>
+      <p class="text-zinc-400 max-w-xl mx-auto">
+        Three levels of autism under one roof. We don't tiptoe around it — it's part of who we are.
+      </p>
+    </section>
+  </main>
+
+  <footer class="container-page !py-6 border-t border-zinc-800 mt-12">
+    <div class="flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-zinc-500">
+      <div>
+        © <span id="year">2026</span> espifam.com ·
+        <a href="https://joshespi.com" class="!text-zinc-400 hover:!text-zinc-200" target="_blank" rel="noopener">joshespi.com</a>
+      </div>
+      <button data-theme-toggle
+              class="text-zinc-400 hover:text-zinc-100 transition-colors text-xs uppercase tracking-wider">
+        toggle theme
+      </button>
+    </div>
+  </footer>
+
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+  <script src="/js/theme-toggle.js"></script>
+</body>
+</html>
