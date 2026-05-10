@@ -3,19 +3,18 @@
 Static site for espifam.com.
 
 
-## Scripts
+## Local Development
 
-- `npm run dev` — Tailwind watch → `src/styles/output.css`
-- `npm run build` — clean `public/`, copy `src/`, compile minified CSS
-- `npm run deploy` — build, then rsync `public/` to `$ESPIFAM_DEPLOY_TARGET`
+```bash
+docker run -p 8085:80 -v $(pwd)/src:/usr/share/nginx/html:ro nginx
+```
 
-## Per-member accent
+Open `http://localhost:8085`.
 
-Pages set `data-member` on `<body>`. [src/styles/input.css](src/styles/input.css) maps it to `--accent`.
+
 
 ## Deploy
 
 ```bash
-export ESPIFAM_DEPLOY_TARGET="user@nginx-host:/var/www/html/espifam.com/"
-npm run deploy
+export ESPIFAM_DEPLOY_TARGET="user@nginx-host:/var/www/html/espifam.com/" && npm run deploy
 ```
