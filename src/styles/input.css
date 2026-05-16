@@ -83,6 +83,7 @@
     height: 88px;
     font-size: 2rem;
   }
+  .avatar-sm { width: 48px; height: 48px; font-size: 1rem; }
   .avatar-lg { width: 128px; height: 128px; font-size: 2.75rem; }
 
   /* Rainbow puzzle-piece motif element. Used as a small awareness flair. */
