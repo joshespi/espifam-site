@@ -10,8 +10,7 @@
   document.addEventListener('click', (e) => {
     const btn = e.target.closest('[data-theme-toggle]');
     if (!btn) return;
-    const current = root.dataset.theme === 'light' ? 'light' : 'dark';
-    const next = current === 'light' ? 'dark' : 'light';
+    const next = root.dataset.theme === 'light' ? 'dark' : 'light';
     root.dataset.theme = next;
     localStorage.setItem(KEY, next);
   });

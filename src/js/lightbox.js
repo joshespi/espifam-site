@@ -15,6 +15,7 @@
     if (!img) return;
     e.preventDefault();
 
+    close();
     overlay = document.createElement('div');
     overlay.className = 'fixed inset-0 z-50 bg-black/90 flex items-center justify-center p-6 cursor-zoom-out';
     const big = document.createElement('img');
