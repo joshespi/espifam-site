@@ -7,6 +7,13 @@
 [data-member="josh"]   { --accent: #dc2626; --accent-soft: #7f1d1d; }
 [data-member="sarah"]  { --accent: #38bdf8; --accent-soft: #075985; }
 [data-member="xander"] { --accent: #16a34a; --accent-soft: #14532d; }
+
+body[data-member="xander"] {
+  background-image: url('/assets/xander-assets/xander-bg.png');
+  background-repeat: repeat;
+  background-size: 220px;
+  background-blend-mode: soft-light;
+}
 [data-member="odin"]   { --accent: #facc15; --accent-soft: #713f12; }
 [data-member="family"] { --accent: #ef4444; --accent-soft: #7f1d1d; }
 
