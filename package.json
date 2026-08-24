@@ -1,12 +1,12 @@
 {
   "name": "espifam-site",
   "private": true,
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Static family-creators hub at espifam.com",
   "scripts": {
     "dev": "tailwindcss -i src/styles/input.css -o src/styles/output.css --watch",
     "build:css": "tailwindcss -i src/styles/input.css -o public/styles.css --minify",
-    "build:copy": "rsync -a --delete --exclude='styles' --exclude='styles.css' src/ public/",
+    "build:copy": "node scripts/copy-src.mjs",
     "build": "rm -rf public && mkdir -p public && npm run build:copy && npm run build:css",
     "deploy": "bash scripts/deploy.sh"
   },

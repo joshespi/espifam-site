@@ -16,5 +16,6 @@ Open `http://localhost:8085`.
 ## Deploy
 
 ```bash
-export ESPIFAM_DEPLOY_TARGET="user@nginx-host:/var/www/html/espifam.com/" && npm run deploy
+export ESPIFAM_DEPLOY_TARGET="user@nginx-host:/var/www/html/espifam.com/"
+npm run deploy
 ```
