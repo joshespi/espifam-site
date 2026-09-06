@@ -20,7 +20,8 @@ const src = path.join(root, "src");
 const dest = path.join(root, "public");
 const SITE = "https://espifam.com";
 
-const skip = new Set(["styles", "partials"]);
+// "feed" is temporary: the page is hidden until the YouTube API key is live.
+const skip = new Set(["styles", "partials", "feed"]);
 const isSkipped = (rel) => skip.has(rel.split(path.sep)[0]);
 
 const partialCache = new Map();
