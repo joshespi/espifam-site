@@ -1,17 +1,124 @@
 # espifam-site
 
-Static site for espifam.com.
+Static site for espifam.com. Plain HTML + Tailwind, built to `public/` and
+shipped to an nginx VM.
 
-
-## Local Development
+## Build
 
 ```bash
-docker run -p 8085:80 -v $(pwd)/src:/usr/share/nginx/html:ro nginx
+npm install
+npm run build      # -> public/
 ```
 
-Open `http://localhost:8085`.
+`build:html` resolves partials and writes `sitemap.xml`; `build:css` compiles Tailwind.
 
+## Local development
 
+```bash
+npm run dev        # builds, then watches Tailwind into public/styles.css
+npm run serve      # serves public/ at http://localhost:8085
+```
+
+Run those in two terminals. Serve `public/`, never `src/` — `src/` has
+unresolved includes and no compiled stylesheet.
+
+After editing HTML, re-run `npm run build:html` (only CSS is watched).
+
+## How pages are assembled
+
+Pages are composed from `src/partials/` at build time using the SSI comment
+syntax, extended with attributes that fill `{{placeholders}}`:
+
+```html
+<!--#include virtual="/partials/head.html"
+    title="Skys · espifam"
+    description="Skys — captain of the Espi crew." -->
+```
+
+Partials also support `{{#if key=value}}…{{/if}}`. A `{{key}}` with no value is a build error.
+
+Every page gets `site`, `url`, `slug` and `image` for free, derived from its own
+path — so a page never restates its own URL, the nav marks the current link
+itself, and `og:image` picks up `src/assets/og/<slug>.png` when one exists
+(falling back to the family card). An explicit attribute on the include still
+wins if you need to override one.
+
+Reusable blocks live in partials too: `member-card.html` (homepage crew grid)
+and `thumb.html` (lightbox thumbnails).
+
+Because this resolves at build time, nginx does **not** need `ssi on` and the
+output works on any static host.
+
+To add a page: create `src/<name>/index.html`, include the three partials, and
+add a nav entry in `src/partials/nav.html`. The canonical URL, `aria-current`,
+OG image, sitemap entry and `robots.txt` all follow automatically.
+
+## Theming
+
+`src/styles/input.css` defines semantic colors (`--c-body`, `--c-muted`,
+`--c-line`, …) per theme, exposed to Tailwind as `text-body`, `text-muted`,
+`border-line`, and so on. **Use those, not raw `zinc-*` classes** — hardcoded
+zinc values don't respond to the light theme and fail contrast on a light
+background.
+
+Per-member accents come from `data-member` on `<body>`. Each member sets
+`--accent` (fills/borders), `--accent-on` (text on top of the accent), and
+light/dark `--accent-ink` variants for the accent used *as* text, so it keeps
+4.5:1 contrast in both themes.
+
+Theme is applied to `<html>` by an inline script in `head.html` before first
+paint, so there's no flash. It follows the OS until the visitor picks a theme.
+
+## Social share images
+
+`src/assets/og/*.png` are generated from a template by headless Chrome. Accent
+and background colors are read out of `src/styles/input.css` at generation time,
+so a retheme can't leave a stale color baked into a committed card:
+
+```bash
+npm run og
+```
+
+This is not part of `npm run build` — it needs a local Chrome and the output is
+committed. Re-run it when a name, tagline, avatar, or accent color changes. Set
+`CHROME_PATH` if your browser isn't in the default list.
+
+## Images
+
+Raster assets are committed as pre-sized WebP; there is no image build step.
+When adding one, size it to roughly 2× its display size first:
+
+```bash
+cwebp -q 82 -resize 256 0 new-avatar.png -o src/assets/avatars/new-avatar.webp
+```
+
+Avatars are 256px. Lightbox images are committed as a **pair** — `name.webp` at
+800px and `name-thumb.webp` at 192px:
+
+```bash
+cwebp -q 82 -resize 192 0 src/assets/.../name.webp -o src/assets/.../name-thumb.webp
+```
+
+`partials/thumb.html` takes the path without an extension and wires both: the
+page loads only the thumb, and `lightbox.js` fetches the 800px file from
+`data-full` when someone actually opens it. Shipping the full-size file as the
+thumbnail costs ~90 KB per page for images most visitors never enlarge.
+
+## YouTube feed
+
+`/feed/` reads the YouTube Data API from the browser. Copy the example config
+and add a key:
+
+```bash
+cp src/js/feed-config.example.js src/js/feed-config.js
+```
+
+`feed-config.js` is gitignored, but the key is still visible in the shipped
+page — that's unavoidable for a client-side call. **Restrict the key to an
+`espifam.com` HTTP referrer in the Google Cloud console** so the quota can't be
+drained from elsewhere. Responses are cached in `localStorage` for an hour.
+
+Without a key the page renders a message instead of failing.
 
 ## Deploy
 
@@ -19,3 +126,17 @@ Open `http://localhost:8085`.
 export ESPIFAM_DEPLOY_TARGET="user@nginx-host:/var/www/html/espifam.com/"
 npm run deploy
 ```
+
+Uploads to `<dir>.new`, verifies it, then swaps it in by rename — all over a
+single multiplexed ssh connection. The live site is never missing or
+half-written, and the previous release stays at `<dir>.prev` for rollback:
+
+```bash
+ssh user@host 'rm -rf /path/espifam.com && mv /path/espifam.com.prev /path/espifam.com'
+```
+
+Point nginx's `error_page 404` at `/404.html`.
+
+`sitemap.xml` and `robots.txt` are generated by the build from the `SITE`
+constant in `scripts/build.mjs` — that constant is the only place the origin is
+written down.
