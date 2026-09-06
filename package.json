@@ -1,13 +1,15 @@
 {
   "name": "espifam-site",
   "private": true,
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "Static family-creators hub at espifam.com",
   "scripts": {
-    "dev": "tailwindcss -i src/styles/input.css -o src/styles/output.css --watch",
+    "build:html": "node scripts/build.mjs",
     "build:css": "tailwindcss -i src/styles/input.css -o public/styles.css --minify",
-    "build:copy": "node scripts/copy-src.mjs",
-    "build": "rm -rf public && mkdir -p public && npm run build:copy && npm run build:css",
+    "build": "npm run build:html && npm run build:css",
+    "dev": "npm run build:html && tailwindcss -i src/styles/input.css -o public/styles.css --watch",
+    "serve": "docker run --rm -p 8085:80 -v \"$PWD/public:/usr/share/nginx/html:ro\" nginx",
+    "og": "node scripts/gen-og.mjs",
     "deploy": "bash scripts/deploy.sh"
   },
   "devDependencies": {
