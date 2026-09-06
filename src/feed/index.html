@@ -1,34 +1,27 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Feed · espifam</title>
-  <meta name="description" content="Latest videos from the Espi family channels." />
-  <meta property="og:title" content="Feed · espifam" />
-  <meta property="og:description" content="Latest videos from the Espi family channels." />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://espifam.com/feed/" />
-  <link rel="stylesheet" href="/styles.css" />
-  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
+  <!--#include virtual="/partials/head.html"
+      title="Feed · espifam"
+      description="Latest videos from the Espi family channels." -->
 </head>
 <body data-member="family">
   <!--#include virtual="/partials/nav.html" -->
 
-  <main class="container-page flex-1">
+  <main id="main" class="container-page py-8 flex-1">
     <section class="py-8 text-center">
       <p class="pill mb-4">what we're making</p>
       <h1 class="mb-4">Feed</h1>
-      <p class="text-zinc-400 max-w-xl mx-auto">Latest videos from the family channels.</p>
+      <p class="text-muted max-w-xl mx-auto">Latest videos from the family channels.</p>
     </section>
 
-    <div id="feed-container" class="space-y-14 pb-16"></div>
+    <div id="feed-container" class="space-y-14 pb-16" aria-busy="true" aria-live="polite"></div>
   </main>
 
   <!--#include virtual="/partials/footer.html" -->
 
-  <script src="/js/theme-toggle.js"></script>
-  <script src="/js/feed-config.js"></script>
-  <script src="/js/feed.js"></script>
+  <script src="/js/theme-toggle.js" defer></script>
+  <script src="/js/feed-config.js" defer></script>
+  <script src="/js/feed.js" defer></script>
 </body>
 </html>

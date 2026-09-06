@@ -1,11 +1,15 @@
-<header class="container-page flex items-center justify-between !py-6">
-  <a href="/" class="nav-link !text-zinc-100 !text-base font-bold">espifam</a>
-  <nav class="flex items-center gap-5">
-    <a href="/josh/" class="nav-link">Espi</a>
-    <a href="/sarah/" class="nav-link">Skys</a>
-    <a href="/xander/" class="nav-link">Xander</a>
-    <a href="/odin/" class="nav-link">Ode's</a>
-    <a href="/feed/" class="nav-link">Feed</a>
-  </nav>
+<a href="#main" class="skip-link">Skip to content</a>
+<header class="container-page py-6">
+  <div class="flex items-center justify-between gap-4 flex-wrap">
+    <a href="/" class="nav-link nav-brand">espifam</a>
+    <nav aria-label="Main">
+      <ul class="flex items-center flex-wrap gap-x-5 gap-y-2">
+        <li><a href="/josh/"    class="nav-link" {{#if slug=josh}}aria-current="page"{{/if}}>Espi</a></li>
+        <li><a href="/sarah/"   class="nav-link" {{#if slug=sarah}}aria-current="page"{{/if}}>Skys</a></li>
+        <li><a href="/xander/"  class="nav-link" {{#if slug=xander}}aria-current="page"{{/if}}>Xander</a></li>
+        <li><a href="/odin/"    class="nav-link" {{#if slug=odin}}aria-current="page"{{/if}}>Ode's</a></li>
+        <li><a href="/feed/"    class="nav-link" {{#if slug=feed}}aria-current="page"{{/if}}>Feed</a></li>
+      </ul>
+    </nav>
+  </div>
 </header>
-<script>document.querySelectorAll('nav a').forEach(a=>{if(a.pathname===location.pathname)a.classList.add('!text-zinc-100');});</script>

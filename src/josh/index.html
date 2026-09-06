@@ -1,112 +1,89 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Espi · espifam</title>
-  <meta name="description" content="Espi (Josh) — gaming, software, and a few things in between." />
-  <meta property="og:title" content="Espi · espifam" />
-  <meta property="og:description" content="Espi (Josh) — gaming, software, and a few things in between." />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://espifam.com/josh/" />
-  <link rel="stylesheet" href="/styles.css" />
-  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
+  <!--#include virtual="/partials/head.html"
+      title="Espi · espifam"
+      description="Espi (Josh) — gaming, software, and a few things in between." -->
 </head>
 <body data-member="josh">
   <!--#include virtual="/partials/nav.html" -->
 
-  <main class="container-page flex-1">
-    <section class="flex flex-col md:flex-row items-center md:items-start gap-8 py-8">
-      <div class="avatar avatar-lg shrink-0"><img src="/assets/avatars/josh.png" alt="" class="w-full h-full object-cover" /></div>
-      <div class="flex-1 text-center md:text-left">
+  <main id="main" class="container-page py-8 flex-1">
+    <section class="member-hero">
+      <div class="avatar avatar-lg">
+        <img src="/assets/avatars/josh.webp" alt="" width="128" height="128" />
+      </div>
+      <div class="member-hero-body">
         <p class="pill mb-3">dad</p>
         <h1 class="mb-2">Espi</h1>
-        <p class="text-zinc-400 mb-6">software engineer · gamer · on the spectrum</p>
-        <p class="text-zinc-300 leading-relaxed mb-8 max-w-2xl">
+        <p class="text-muted mb-6">software engineer · gamer · on the spectrum</p>
+        <p class="leading-relaxed mb-8 max-w-2xl">
           Had this handle since the Gmail beta and it stuck. I write software, play games,
           and post a video now and then. One of three of us on the spectrum.
         </p>
 
+        <h2 class="sr-only">Things I make</h2>
         <div class="flex flex-wrap gap-3 justify-center md:justify-start">
           <a href="https://www.youtube.com/@Joshespi" class="btn" target="_blank" rel="noopener noreferrer">
-            YouTube
-            <span aria-hidden="true">→</span>
+            YouTube <span aria-hidden="true">→</span>
           </a>
           <a href="https://joshespi.com" class="btn-ghost" target="_blank" rel="noopener noreferrer">
-            joshespi.com
-            <span aria-hidden="true">→</span>
+            joshespi.com <span aria-hidden="true">→</span>
           </a>
           <a href="https://finance.espifam.com" class="btn-ghost" target="_blank" rel="noopener noreferrer">
-            finance tracker
-            <span aria-hidden="true">→</span>
+            finance tracker <span aria-hidden="true">→</span>
           </a>
           <a href="https://dcc.joshespi.com" class="btn-ghost" target="_blank" rel="noopener noreferrer">
-            dcc game
-            <span aria-hidden="true">→</span>
+            dcc game <span aria-hidden="true">→</span>
           </a>
           <a href="https://crawlersinwaiting.com" class="btn-ghost" target="_blank" rel="noopener noreferrer">
-            crawlers in waiting
-            <span aria-hidden="true">→</span>
+            crawlers in waiting <span aria-hidden="true">→</span>
           </a>
           <a href="https://tvtime.joshespi.com" class="btn-ghost" target="_blank" rel="noopener noreferrer">
-            tv time: TV and Movie watching tracker.
-            <span aria-hidden="true">→</span>
+            tv time <span aria-hidden="true">→</span>
           </a>
           <a href="https://soundboard.joshespi.com" class="btn-ghost" target="_blank" rel="noopener noreferrer">
-            soundboard
-            <span aria-hidden="true">→</span>
+            soundboard <span aria-hidden="true">→</span>
           </a>
         </div>
 
-        <p class="text-sm text-zinc-400 mt-4 max-w-2xl">
-          <span class="text-zinc-300 font-semibold">YouTube:</span>
-          gaming and misc videos.
-        </p>
+        <dl class="mt-6 space-y-2 text-sm max-w-2xl text-left">
+          <div>
+            <dt class="inline font-semibold">YouTube:</dt>
+            <dd class="inline text-muted">gaming and misc videos.</dd>
+          </div>
+          <div>
+            <dt class="inline font-semibold">joshespi.com:</dt>
+            <dd class="inline text-muted">if you'd like to hire me to do some work.</dd>
+          </div>
+          <div>
+            <dt class="inline font-semibold">finance tracker:</dt>
+            <dd class="inline text-muted">a personal finance tool for tracking money, investments, debt payoff, and goals.
+              I couldn't find an app that did the things I wanted, the way I wanted, so I built it.</dd>
+          </div>
+          <div>
+            <dt class="inline font-semibold">dcc game:</dt>
+            <dd class="inline text-muted">a JavaScript dungeon crawler, Dungeon Crawler Carl fan project.</dd>
+          </div>
+          <div>
+            <dt class="inline font-semibold">crawlers in waiting:</dt>
+            <dd class="inline text-muted">a Dungeon Crawler Carl fan podcast — Skys and I are reading the series
+              together and recording it.</dd>
+          </div>
+          <div>
+            <dt class="inline font-semibold">tv time:</dt>
+            <dd class="inline text-muted">a tool for tracking what I'm watching — shows, movies, progress.</dd>
+          </div>
+          <div>
+            <dt class="inline font-semibold">soundboard:</dt>
+            <dd class="inline text-muted">a simple web soundboard.</dd>
+          </div>
+        </dl>
 
-        <p class="text-sm text-zinc-400 mt-2 max-w-2xl">
-          <span class="text-zinc-300 font-semibold">joshespi.com:</span>
-          If you'd like to hire me to do some work.
-        </p>
-
-        <p class="text-sm text-zinc-400 mt-2 max-w-2xl">
-          <span class="text-zinc-300 font-semibold">finance tracker:</span>
-          a personal finance tool for tracking money, investments, debt payoff, and goals. I couldn't find an app that did
-          the things I wanted, the way I wanted, so I built it.
-        </p>
-
-        <p class="text-sm text-zinc-400 mt-2 max-w-2xl">
-          <span class="text-zinc-300 font-semibold">dcc game:</span>
-          a JavaScript dungeon crawler, Dungeon Crawler Carl fan project.
-        </p>
-
-        <p class="text-sm text-zinc-400 mt-2 max-w-2xl">
-          <span class="text-zinc-300 font-semibold">crawlers in waiting:</span>
-          a Dungeon Crawler Carl fan podcast — Skys and I are reading the series together and recording it.
-        </p>
-
-        <p class="text-sm text-zinc-400 mt-2 max-w-2xl">
-          <span class="text-zinc-300 font-semibold">tv time:</span>
-          a tool for tracking what I'm watching — shows, movies, progress.
-        </p>
-
-        <p class="text-sm text-zinc-400 mt-2 max-w-2xl">
-          <span class="text-zinc-300 font-semibold">soundboard:</span>
-          a simple web soundboard.
-        </p>
-
-        <div class="mt-6 flex flex-wrap gap-6">
-          <figure class="inline-flex flex-col items-center gap-1.5">
-            <img src="/assets/avatars-roblox/roblox-dad.PNG" alt="Espi as a Roblox character"
-                 data-lightbox
-                 class="w-24 h-24 rounded-xl object-cover ring-1 ring-zinc-700 cursor-zoom-in" />
-            <figcaption class="text-xs text-zinc-500">made by Xander · Roblox</figcaption>
-          </figure>
-          <figure class="inline-flex flex-col items-center gap-1.5">
-            <img src="/assets/avatars-ciw/espi.jpg" alt="Espi — Crawlers in Waiting podcast"
-                 data-lightbox
-                 class="w-24 h-24 rounded-xl object-cover ring-1 ring-zinc-700 cursor-zoom-in" />
-            <figcaption class="text-xs text-zinc-500">crawlers in waiting</figcaption>
-          </figure>
+        <h2 class="sr-only">Pictures</h2>
+        <div class="mt-8 flex flex-wrap gap-6 justify-center md:justify-start">
+          <!--#include virtual="/partials/thumb.html" src="/assets/avatars-roblox/roblox-dad" alt="Espi as a Roblox character" caption="made by Xander · Roblox" -->
+          <!--#include virtual="/partials/thumb.html" src="/assets/avatars-ciw/espi" alt="Espi — Crawlers in Waiting podcast" caption="crawlers in waiting" -->
         </div>
       </div>
     </section>
@@ -114,7 +91,7 @@
 
   <!--#include virtual="/partials/footer.html" -->
 
-  <script src="/js/theme-toggle.js"></script>
-  <script src="/js/lightbox.js"></script>
+  <script src="/js/theme-toggle.js" defer></script>
+  <script src="/js/lightbox.js" defer></script>
 </body>
 </html>

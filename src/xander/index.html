@@ -1,54 +1,47 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>xanderman_luigi · espifam</title>
-  <meta name="description" content="Xander — Luigi, gaming, streams incoming." />
-  <meta property="og:title" content="xanderman_luigi · espifam" />
-  <meta property="og:description" content="Xander — Luigi, gaming, streams incoming." />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://espifam.com/xander/" />
-  <link rel="stylesheet" href="/styles.css" />
-  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
+  <!--#include virtual="/partials/head.html"
+      title="xanderman_luigi · espifam"
+      description="Xander — Luigi, gaming, streams incoming." -->
 </head>
 <body data-member="xander">
   <!--#include virtual="/partials/nav.html" -->
 
-  <main class="container-page flex-1">
-    <section class="flex flex-col md:flex-row items-center md:items-start gap-8 py-8">
-      <div class="avatar avatar-lg shrink-0"><img src="/assets/avatars/xander.png" alt="" class="w-full h-full object-cover" /></div>
-      <div class="flex-1 text-center md:text-left">
+  <main id="main" class="container-page py-8 flex-1">
+    <section class="member-hero">
+      <div class="avatar avatar-lg">
+        <img src="/assets/avatars/xander.webp" alt="" width="128" height="128" />
+      </div>
+      <div class="member-hero-body">
         <p class="pill mb-3">younger son</p>
         <h1 class="mb-2">xanderman_luigi</h1>
-        <p class="text-zinc-400 mb-6">YouTube · streams incoming · on the spectrum</p>
-        <p class="text-zinc-300 leading-relaxed mb-8 max-w-2xl">
-          Loves Luigi. Loves South Park (especially Stan), Beavis and Butt-Head, and The Amazing Digital Circus (Jax is his favorite). Plays Cult of the Lamb, Mortal Kombat,
-          Rayman, and Roblox — Forsaken and Die of Death lately. Really good at impressions and
-          acting. Wants to be a YouTuber and a streamer, and is actually putting in the work to
-          make it happen.
+        <p class="text-muted mb-6">YouTube · streams incoming · on the spectrum</p>
+        <p class="leading-relaxed mb-8 max-w-2xl">
+          Loves Luigi. Loves South Park (especially Stan), Beavis and Butt-Head, and The Amazing Digital Circus
+          (Jax is his favorite). Plays Cult of the Lamb, Mortal Kombat, Rayman, and Roblox — Forsaken and
+          Die of Death lately. Really good at impressions and acting. Wants to be a YouTuber and a streamer,
+          and is actually putting in the work to make it happen.
         </p>
 
+        <h2 class="sr-only">Things I make</h2>
         <div class="flex flex-wrap gap-3 justify-center md:justify-start">
           <a href="https://www.youtube.com/@xanderman_luigi" class="btn" target="_blank" rel="noopener noreferrer">
-            YouTube
-            <span aria-hidden="true">→</span>
+            YouTube <span aria-hidden="true">→</span>
           </a>
         </div>
 
-        <figure class="mt-6 inline-flex flex-col items-center gap-1.5">
-          <img src="/assets/avatars-roblox/roblox-xander.PNG" alt="Xander's Roblox character"
-               data-lightbox
-               class="w-24 h-24 rounded-xl object-cover ring-1 ring-zinc-700 cursor-zoom-in" />
-          <figcaption class="text-xs text-zinc-500">my Roblox</figcaption>
-        </figure>
+        <h2 class="sr-only">Pictures</h2>
+        <div class="mt-8 flex flex-wrap gap-6 justify-center md:justify-start">
+          <!--#include virtual="/partials/thumb.html" src="/assets/avatars-roblox/roblox-xander" alt="Xander's Roblox character" caption="my Roblox" -->
+        </div>
       </div>
     </section>
   </main>
 
   <!--#include virtual="/partials/footer.html" -->
 
-  <script src="/js/theme-toggle.js"></script>
-  <script src="/js/lightbox.js"></script>
+  <script src="/js/theme-toggle.js" defer></script>
+  <script src="/js/lightbox.js" defer></script>
 </body>
 </html>

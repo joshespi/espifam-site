@@ -1,13 +1,11 @@
-<footer class="container-page !py-6 border-t border-zinc-800 mt-12">
-  <div class="flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-zinc-500">
-    <div>
-      © <span id="year"></span> espifam.com ·
-      <a href="https://joshespi.com" class="!text-zinc-400 hover:!text-zinc-200" target="_blank" rel="noopener noreferrer">joshespi.com</a>
-    </div>
-    <button data-theme-toggle
-            class="text-zinc-400 hover:text-zinc-100 transition-colors text-xs uppercase tracking-wider">
-      toggle theme
-    </button>
+<footer class="container-page py-6 border-t border-line mt-12">
+  <div class="flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-muted">
+    <p>
+      &copy; <span id="year">2026</span> espifam.com &middot;
+      <a href="https://joshespi.com" target="_blank" rel="noopener noreferrer">joshespi.com</a>
+    </p>
+    <button type="button" data-theme-toggle aria-pressed="false"
+            class="nav-link nav-link-xs uppercase tracking-wider">Switch to light theme</button>
   </div>
 </footer>
 <script>document.getElementById('year').textContent = new Date().getFullYear();</script>

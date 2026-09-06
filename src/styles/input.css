@@ -3,95 +3,213 @@
 @source "../**/*.html";
 @source "../js/*.js";
 
-/* Per-member accent palette. Set via data-member on <body> (or any wrapper). */
-[data-member="josh"]   { --accent: #dc2626; --accent-soft: #7f1d1d; }
-[data-member="sarah"]  { --accent: #38bdf8; --accent-soft: #075985; }
-[data-member="xander"] { --accent: #16a34a; --accent-soft: #14532d; }
-
-body[data-member="xander"] {
-  background-image: url('/assets/xander-assets/xander-bg.png');
-  background-repeat: repeat;
-  background-size: 220px;
-  background-blend-mode: soft-light;
+/* Semantic colors are indirected through --c-* so a theme can swap them at
+   runtime; Tailwind only ever sees the stable --color-* names, which gives us
+   real utilities (text-muted, text-faint, border-line, bg-line). */
+@theme {
+  --color-page: var(--c-page);
+  --color-body: var(--c-body);
+  --color-muted: var(--c-muted);
+  --color-faint: var(--c-faint);
+  --color-line: var(--c-line);
 }
-[data-member="odin"]   { --accent: #facc15; --accent-soft: #713f12; }
-[data-member="family"] { --accent: #ef4444; --accent-soft: #7f1d1d; }
+
+html[data-theme="dark"] {
+  --c-page: #09090b;
+  --c-surface: #18181b;
+  --c-body: #e4e4e7;
+  --c-muted: #b4b4bb;
+  --c-faint: #8f8f98;
+  --c-line: #27272a;
+  color-scheme: dark;
+}
+
+html[data-theme="light"] {
+  --c-page: #fafafa;
+  --c-surface: #ffffff;
+  --c-body: #27272a;
+  --c-muted: #52525b;
+  --c-faint: #6b6b74;
+  --c-line: #e4e4e7;
+  color-scheme: light;
+}
+
+/* Per-member accent palette, set via data-member on <body>.
+   --accent    surfaces, borders, fills
+   --accent-on text placed on top of --accent
+   --accent-ink accent used AS text, so it needs 4.5:1 against the page
+   scripts/gen-og.mjs reads --accent from this block -- keep the format. */
+[data-member="josh"] {
+  --accent: #dc2626; --accent-on: #ffffff;
+  --accent-ink-dark: #f87171; --accent-ink-light: #b91c1c;
+}
+[data-member="sarah"] {
+  --accent: #38bdf8; --accent-on: #0a0a0a;
+  --accent-ink-dark: #7dd3fc; --accent-ink-light: #0369a1;
+}
+[data-member="xander"] {
+  --accent: #16a34a; --accent-on: #ffffff;
+  --accent-ink-dark: #4ade80; --accent-ink-light: #15803d;
+}
+[data-member="odin"] {
+  --accent: #facc15; --accent-on: #0a0a0a;
+  --accent-ink-dark: #fde047; --accent-ink-light: #a16207;
+}
+[data-member="family"] {
+  --accent: #ef4444; --accent-on: #ffffff;
+  --accent-ink-dark: #f87171; --accent-ink-light: #b91c1c;
+}
+
+[data-member] { --accent-ink: var(--accent-ink-dark); }
+html[data-theme="light"] [data-member] { --accent-ink: var(--accent-ink-light); }
 
 @layer base {
-  html { scroll-behavior: smooth; }
+  html {
+    scroll-behavior: smooth;
+    background: var(--c-page);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
 
   body {
-    @apply bg-zinc-950 text-zinc-100 min-h-screen flex flex-col;
+    @apply bg-page text-body min-h-screen flex flex-col;
     font-family: ui-sans-serif, system-ui, -apple-system, sans-serif;
   }
-  body[data-theme="light"] {
-    @apply bg-zinc-50 text-zinc-900;
+
+  body[data-member="xander"] {
+    background-image: url('/assets/xander-assets/xander-bg.webp');
+    background-repeat: repeat;
+    background-size: 220px;
+    background-blend-mode: soft-light;
+  }
+  html[data-theme="light"] body[data-member="xander"] {
+    background-blend-mode: luminosity;
   }
 
-  h1 { @apply text-4xl md:text-5xl font-extrabold tracking-tight; }
-  h2 { @apply text-2xl md:text-3xl font-bold; }
+  h1 { @apply text-4xl md:text-5xl font-extrabold tracking-tight text-balance; }
+  h2 { @apply text-2xl md:text-3xl font-bold text-balance; }
   h3 { @apply text-xl md:text-2xl font-semibold; }
 
-  a:not(.btn):not(.member-card):not(.nav-link) {
+  /* Prose links. Components that are anchors opt out here rather than fighting
+     this rule with overrides -- keep the exclusion list in one place. */
+  a:not(.btn, .btn-ghost, .member-card, .nav-link, .skip-link) {
     @apply underline decoration-1 underline-offset-2 transition;
-    color: var(--accent, #f87171);
+    color: var(--accent-ink, #f87171);
+    &:hover { filter: brightness(1.1); }
   }
-  a:not(.btn):not(.member-card):not(.nav-link):hover { filter: brightness(1.1); }
+
+  :focus-visible {
+    outline: 2px solid var(--accent-ink, currentColor);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
 }
 
 @layer components {
-  .container-page { @apply max-w-5xl mx-auto px-4 py-8 w-full; }
+  /* Page gutter only. Vertical rhythm is the caller's choice, so chrome
+     (header, footer) and content can differ without overrides. */
+  .container-page { @apply max-w-5xl mx-auto px-4 w-full; }
 
-  .nav-link {
-    @apply text-zinc-400 hover:text-zinc-100 transition-colors no-underline text-sm font-medium;
+  .skip-link { @apply sr-only; }
+  .skip-link:focus-visible {
+    @apply not-sr-only fixed top-3 left-3 z-50 rounded-lg px-4 py-2 font-semibold no-underline;
+    background: var(--accent);
+    color: var(--accent-on);
   }
-  body[data-theme="light"] .nav-link {
-    @apply text-zinc-600 hover:text-zinc-900;
+
+  /* Variants use a compound selector rather than !important, so they win on
+     specificity regardless of source order. */
+  .nav-link {
+    @apply text-muted hover:text-body transition-colors no-underline text-sm font-medium;
+  }
+  .nav-link.nav-brand { @apply text-body text-base font-bold; }
+  .nav-link.nav-link-xs { @apply text-xs; }
+  .nav-link[aria-current="page"] {
+    @apply text-body;
+    text-decoration: underline;
+    text-decoration-color: var(--accent-ink);
+    text-underline-offset: 6px;
+    text-decoration-thickness: 2px;
   }
 
   .member-card {
-    @apply rounded-2xl p-6 transition-transform hover:scale-[1.02] block no-underline;
-    background: color-mix(in srgb, var(--accent) 10%, rgb(24 24 27));
+    @apply rounded-2xl p-6 transition-transform hover:scale-[1.02] block no-underline text-body;
+    background: color-mix(in srgb, var(--accent) 10%, var(--c-surface));
     border: 1px solid color-mix(in srgb, var(--accent) 35%, transparent);
   }
-  body[data-theme="light"] .member-card {
-    background: color-mix(in srgb, var(--accent) 8%, white);
-    border: 1px solid color-mix(in srgb, var(--accent) 45%, transparent);
+  html[data-theme="light"] .member-card {
+    background: color-mix(in srgb, var(--accent) 8%, var(--c-surface));
+    border-color: color-mix(in srgb, var(--accent) 45%, transparent);
   }
 
-  .btn {
+  .member-hero { @apply flex flex-col md:flex-row items-center md:items-start gap-8 py-8; }
+  .member-hero-body { @apply flex-1 text-center md:text-left; }
+
+  .btn, .btn-ghost {
     @apply inline-flex items-center justify-center gap-2 rounded-lg px-5 py-2.5 font-semibold transition no-underline;
-    background: var(--accent, #b91c1c);
-    color: #0a0a0a;
+  }
+  .btn {
+    background: var(--accent);
+    color: var(--accent-on);
   }
   .btn:hover { filter: brightness(1.1); }
 
   .btn-ghost {
-    @apply inline-flex items-center justify-center gap-2 rounded-lg px-5 py-2.5 font-semibold transition no-underline border;
+    @apply border;
     border-color: color-mix(in srgb, var(--accent) 50%, transparent);
-    color: var(--accent);
+    color: var(--accent-ink);
     background: transparent;
   }
-  .btn-ghost:hover {
-    background: color-mix(in srgb, var(--accent) 15%, transparent);
-  }
+  .btn-ghost:hover { background: color-mix(in srgb, var(--accent) 15%, transparent); }
+
+  .btn.btn-sm, .btn-ghost.btn-sm { @apply text-sm px-4 py-2; }
 
   .pill {
     @apply inline-block rounded-full px-3 py-1 text-xs font-semibold no-underline;
-    background: color-mix(in srgb, var(--accent) 25%, transparent);
-    color: var(--accent);
+    background: color-mix(in srgb, var(--accent) 22%, transparent);
+    color: var(--accent-ink);
   }
 
   .avatar {
-    @apply rounded-full overflow-hidden flex items-center justify-center font-extrabold;
-    background: color-mix(in srgb, var(--accent) 25%, rgb(39 39 42));
-    color: var(--accent);
+    @apply rounded-full overflow-hidden flex items-center justify-center font-extrabold shrink-0;
+    background: color-mix(in srgb, var(--accent) 25%, var(--c-surface));
+    color: var(--accent-ink);
     width: 88px;
     height: 88px;
     font-size: 2rem;
   }
+  .avatar img { @apply w-full h-full object-cover; }
   .avatar-sm { width: 48px; height: 48px; font-size: 1rem; }
   .avatar-lg { width: 128px; height: 128px; font-size: 2.75rem; }
+
+  .thumb {
+    @apply w-24 h-24 rounded-xl object-cover cursor-zoom-in transition;
+    border: 1px solid var(--c-line);
+  }
+  .thumb-button { @apply p-0 bg-transparent border-0 cursor-zoom-in rounded-xl; }
+  .thumb-button:hover .thumb { filter: brightness(1.08); }
+
+  /* The lightbox scrim stays dark in both themes -- a deliberate choice, kept
+     here with the other color decisions rather than inline in the JS. */
+  .lightbox-overlay {
+    @apply fixed inset-0 z-50 flex items-center justify-center p-6;
+    background: color-mix(in srgb, #000 90%, transparent);
+  }
+  .lightbox-image { @apply max-w-full max-h-full object-contain; }
+  .lightbox-close {
+    @apply absolute top-4 right-4 rounded-lg px-4 py-2 text-sm font-semibold;
+    background: color-mix(in srgb, #fff 10%, transparent);
+    color: #fff;
+  }
+  .lightbox-close:hover { background: color-mix(in srgb, #fff 20%, transparent); }
+
+  .skeleton { @apply animate-pulse; background: var(--c-line); }
 
   /* Rainbow puzzle-piece motif element. Used as a small awareness flair. */
   .puzzle-rainbow {

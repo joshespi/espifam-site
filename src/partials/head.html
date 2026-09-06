@@ -1,0 +1,36 @@
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>{{title}}</title>
+<meta name="description" content="{{description}}" />
+<link rel="canonical" href="{{url}}" />
+
+<!-- Applied before first paint so a stored light theme doesn't flash dark.
+     Must stay above the stylesheet link: an inline script after a
+     <link rel="stylesheet"> can't run until that sheet has loaded. -->
+<script>
+  (() => {
+    try {
+      const stored = localStorage.getItem('espifam-theme');
+      document.documentElement.dataset.theme =
+        stored === 'light' || stored === 'dark'
+          ? stored
+          : (matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+    } catch { document.documentElement.dataset.theme = 'dark'; }
+  })();
+</script>
+
+<link rel="stylesheet" href="/styles.css" />
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png" />
+<meta name="theme-color" content="#fafafa" media="(prefers-color-scheme: light)" />
+<meta name="theme-color" content="#09090b" media="(prefers-color-scheme: dark)" />
+
+<meta property="og:site_name" content="espifam" />
+<meta property="og:title" content="{{title}}" />
+<meta property="og:description" content="{{description}}" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="{{url}}" />
+<meta property="og:image" content="{{site}}/assets/og/{{image}}.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta name="twitter:card" content="summary_large_image" />

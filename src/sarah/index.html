@@ -1,60 +1,49 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Skys · espifam</title>
-  <meta name="description" content="Skys — captain of the Espi crew, dragon enthusiast." />
-  <meta property="og:title" content="Skys · espifam" />
-  <meta property="og:description" content="Skys — captain of the Espi crew, dragon enthusiast." />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://espifam.com/sarah/" />
-  <link rel="stylesheet" href="/styles.css" />
-  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
+  <!--#include virtual="/partials/head.html"
+      title="Skys · espifam"
+      description="Skys — captain of the Espi crew, dragon enthusiast." -->
 </head>
 <body data-member="sarah">
   <!--#include virtual="/partials/nav.html" -->
 
-  <main class="container-page flex-1">
-    <section class="flex flex-col md:flex-row items-center md:items-start gap-8 py-8">
-      <div class="avatar avatar-lg shrink-0"><img src="/assets/avatars/mom.png" alt="" class="w-full h-full object-cover" /></div>
-      <div class="flex-1 text-center md:text-left">
+  <main id="main" class="container-page py-8 flex-1">
+    <section class="member-hero">
+      <div class="avatar avatar-lg">
+        <img src="/assets/avatars/mom.webp" alt="" width="128" height="128" />
+      </div>
+      <div class="member-hero-body">
         <p class="pill mb-3">mom</p>
-        <h1 class="mb-2">Skys 🐉</h1>
-        <p class="text-zinc-400 mb-6">captain of this crew · dragon enthusiast</p>
-        <p class="text-zinc-300 leading-relaxed mb-4 max-w-2xl">
+        <h1 class="mb-2">Skys <span aria-hidden="true">🐉</span></h1>
+        <p class="text-muted mb-6">captain of this crew · dragon enthusiast</p>
+        <p class="leading-relaxed mb-4 max-w-2xl">
           The one keeping the rest of us in line. Three Espis on the spectrum, one of her —
           she does the math every day and keeps showing up for it.
         </p>
-        <p class="text-zinc-300 leading-relaxed mb-8 max-w-2xl">
+        <p class="leading-relaxed mb-8 max-w-2xl">
           Currently reading the Dungeon Crawler Carl series with Espi and recording it — one book at a time.
         </p>
 
+        <h2 class="sr-only">Things I make</h2>
         <div class="flex flex-wrap gap-3 justify-center md:justify-start">
           <a href="https://crawlersinwaiting.com" class="btn" target="_blank" rel="noopener noreferrer">
-            crawlers in waiting
-            <span aria-hidden="true">→</span>
+            crawlers in waiting <span aria-hidden="true">→</span>
           </a>
         </div>
 
-        <p class="text-sm text-zinc-400 mt-4 max-w-2xl">
-          <span class="text-zinc-300 font-semibold">crawlers in waiting:</span>
-          a Dungeon Crawler Carl fan podcast. Reading the series together and talking about it.
-        </p>
+        <dl class="mt-6 space-y-2 text-sm max-w-2xl text-left">
+          <div>
+            <dt class="inline font-semibold">crawlers in waiting:</dt>
+            <dd class="inline text-muted">a Dungeon Crawler Carl fan podcast. Reading the series together and
+              talking about it.</dd>
+          </div>
+        </dl>
 
-        <div class="mt-6 flex flex-wrap gap-6">
-          <figure class="inline-flex flex-col items-center gap-1.5">
-            <img src="/assets/avatars-roblox/roblox-mom.PNG" alt="Skys as a Roblox character"
-                 data-lightbox
-                 class="w-24 h-24 rounded-xl object-cover ring-1 ring-zinc-700 cursor-zoom-in" />
-            <figcaption class="text-xs text-zinc-500">made by Xander · Roblox</figcaption>
-          </figure>
-          <figure class="inline-flex flex-col items-center gap-1.5">
-            <img src="/assets/avatars-ciw/skys.jpg" alt="Skys — Crawlers in Waiting podcast"
-                 data-lightbox
-                 class="w-24 h-24 rounded-xl object-cover ring-1 ring-zinc-700 cursor-zoom-in" />
-            <figcaption class="text-xs text-zinc-500">crawlers in waiting</figcaption>
-          </figure>
+        <h2 class="sr-only">Pictures</h2>
+        <div class="mt-8 flex flex-wrap gap-6 justify-center md:justify-start">
+          <!--#include virtual="/partials/thumb.html" src="/assets/avatars-roblox/roblox-mom" alt="Skys as a Roblox character" caption="made by Xander · Roblox" -->
+          <!--#include virtual="/partials/thumb.html" src="/assets/avatars-ciw/skys" alt="Skys — Crawlers in Waiting podcast" caption="crawlers in waiting" -->
         </div>
       </div>
     </section>
@@ -62,7 +51,7 @@
 
   <!--#include virtual="/partials/footer.html" -->
 
-  <script src="/js/theme-toggle.js"></script>
-  <script src="/js/lightbox.js"></script>
+  <script src="/js/theme-toggle.js" defer></script>
+  <script src="/js/lightbox.js" defer></script>
 </body>
 </html>

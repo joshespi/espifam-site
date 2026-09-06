@@ -1,54 +1,47 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Ode's · espifam</title>
-  <meta name="description" content="Our oldest. Our heart." />
-  <meta property="og:title" content="Ode's · espifam" />
-  <meta property="og:description" content="Our oldest. Our heart." />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://espifam.com/odin/" />
-  <link rel="stylesheet" href="/styles.css" />
-  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
+  <!--#include virtual="/partials/head.html"
+      title="Ode's · espifam"
+      description="Our oldest. Our heart." -->
 </head>
 <body data-member="odin">
   <!--#include virtual="/partials/nav.html" -->
 
-  <main class="container-page flex-1">
-    <section class="flex flex-col md:flex-row items-center md:items-start gap-8 py-8">
-      <div class="avatar avatar-lg shrink-0"><img src="/assets/avatars/odin.png" alt="" class="w-full h-full object-cover" /></div>
-      <div class="flex-1 text-center md:text-left">
+  <main id="main" class="container-page py-8 flex-1">
+    <section class="member-hero">
+      <div class="avatar avatar-lg">
+        <img src="/assets/avatars/odin.webp" alt="" width="128" height="128" />
+      </div>
+      <div class="member-hero-body">
         <p class="pill mb-3">our oldest</p>
         <h1 class="mb-2">Ode's</h1>
-        <p class="text-zinc-400 mb-6">non-verbal · most affected · most loved</p>
-        <p class="text-zinc-300 leading-relaxed mb-4 max-w-2xl">
+        <p class="text-muted mb-6">non-verbal · most affected · most loved</p>
+        <p class="leading-relaxed mb-4 max-w-2xl">
           Odin doesn't speak with words, but he's the loudest part of our family.
           He loves SpongeBob and Mickey Mouse and the people who love him back.
         </p>
-        <p class="text-zinc-300 leading-relaxed mb-8 max-w-2xl">
+        <p class="leading-relaxed mb-8 max-w-2xl">
           Autism is more present in our home because of him, and we wouldn't be
           the family we are without him.
         </p>
 
-        <div class="flex flex-wrap items-center gap-3 justify-center md:justify-start text-zinc-400 text-sm">
-          <span class="puzzle-rainbow"></span>
+        <p class="flex flex-wrap items-center gap-3 justify-center md:justify-start text-muted text-sm">
+          <span class="puzzle-rainbow" aria-hidden="true"></span>
           <span>autism awareness — every day, in this house</span>
-        </div>
+        </p>
 
-        <figure class="mt-6 inline-flex flex-col items-center gap-1.5">
-          <img src="/assets/avatars-roblox/roblox-odin.PNG" alt="Ode's as a Roblox character"
-               data-lightbox
-               class="w-24 h-24 rounded-xl object-cover ring-1 ring-zinc-700 cursor-zoom-in" />
-          <figcaption class="text-xs text-zinc-500">made by Xander · Roblox</figcaption>
-        </figure>
+        <h2 class="sr-only">Pictures</h2>
+        <div class="mt-8 flex flex-wrap gap-6 justify-center md:justify-start">
+          <!--#include virtual="/partials/thumb.html" src="/assets/avatars-roblox/roblox-odin" alt="Ode's as a Roblox character" caption="made by Xander · Roblox" -->
+        </div>
       </div>
     </section>
   </main>
 
   <!--#include virtual="/partials/footer.html" -->
 
-  <script src="/js/theme-toggle.js"></script>
-  <script src="/js/lightbox.js"></script>
+  <script src="/js/theme-toggle.js" defer></script>
+  <script src="/js/lightbox.js" defer></script>
 </body>
 </html>
