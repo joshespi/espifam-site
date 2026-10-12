@@ -1,46 +1,33 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <!--#include virtual="/partials/head.html"
-      title="Skys · espifam"
-      description="Skys — captain of the Espi crew, dragon enthusiast." -->
+  <!--#include virtual="/partials/head.html" title="Skys · espifam" description="Skys — captain of the Espi crew, dragon enthusiast." -->
 </head>
 <body data-member="sarah">
   <!--#include virtual="/partials/nav.html" -->
 
-  <main id="main" class="container-page py-8 flex-1">
+  <main class="container-page flex-1 py-8">
     <section class="member-hero">
-      <div class="avatar avatar-lg">
-        <img src="/assets/avatars/mom.webp" alt="" width="128" height="128" />
-      </div>
+      <div class="avatar avatar-lg"><img src="/assets/avatars/mom.webp" width="256" height="256" alt="" /></div>
       <div class="member-hero-body">
         <p class="pill mb-3">mom</p>
-        <h1 class="mb-2">Skys <span aria-hidden="true">🐉</span></h1>
-        <p class="text-muted mb-6">captain of this crew · dragon enthusiast</p>
-        <p class="leading-relaxed mb-4 max-w-2xl">
+        <h1 class="mb-2">Skys 🐉</h1>
+        <p class="text-zinc-400 mb-6">captain of this crew · dragon enthusiast</p>
+        <p class="text-zinc-300 leading-relaxed mb-4 max-w-2xl">
           The one keeping the rest of us in line. Three Espis on the spectrum, one of her —
           she does the math every day and keeps showing up for it.
         </p>
-        <p class="leading-relaxed mb-8 max-w-2xl">
+        <p class="text-zinc-300 leading-relaxed mb-8 max-w-2xl">
           Currently reading the Dungeon Crawler Carl series with Espi and recording it — one book at a time.
         </p>
 
-        <h2 class="sr-only">Things I make</h2>
-        <div class="flex flex-wrap gap-3 justify-center md:justify-start">
-          <a href="https://crawlersinwaiting.com" class="btn" target="_blank" rel="noopener noreferrer">
-            crawlers in waiting <span aria-hidden="true">→</span>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-left max-w-2xl">
+          <a href="https://crawlersinwaiting.com" class="link-card" target="_blank" rel="noopener noreferrer">
+            <span class="link-card-title">crawlers in waiting</span>
+            <p class="link-card-desc">A Dungeon Crawler Carl fan podcast. Reading the series together and talking about it.</p>
           </a>
         </div>
 
-        <dl class="mt-6 space-y-2 text-sm max-w-2xl text-left">
-          <div>
-            <dt class="inline font-semibold">crawlers in waiting:</dt>
-            <dd class="inline text-muted">a Dungeon Crawler Carl fan podcast. Reading the series together and
-              talking about it.</dd>
-          </div>
-        </dl>
-
-        <h2 class="sr-only">Pictures</h2>
         <div class="mt-8 flex flex-wrap gap-6 justify-center md:justify-start">
           <!--#include virtual="/partials/thumb.html" src="/assets/avatars-roblox/roblox-mom" alt="Skys as a Roblox character" caption="made by Xander · Roblox" -->
           <!--#include virtual="/partials/thumb.html" src="/assets/avatars-ciw/skys" alt="Skys — Crawlers in Waiting podcast" caption="crawlers in waiting" -->
@@ -51,7 +38,6 @@
 
   <!--#include virtual="/partials/footer.html" -->
 
-  <script src="/js/theme-toggle.js" defer></script>
   <script src="/js/lightbox.js" defer></script>
 </body>
 </html>
