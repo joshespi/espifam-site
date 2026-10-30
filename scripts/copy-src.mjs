@@ -4,7 +4,7 @@
 //   - renders each page, inlining <!--#include virtual="/partials/x.html" k="v" -->
 //     (recursively, so partials can include partials). In the partial,
 //     {{key}} is filled from the include's attributes plus the page vars: site,
-//     url, image (its og card in assets/og/, else "family") and cssVersion
+//     url, image (its og card in assets/og/, else "family"), year and cssVersion
 //     (content hash of styles.css, for cache busting). {{#if key}}...{{/if}}
 //     and {{#if !key}}...{{/if}} keep or drop a block. A missing key fails the
 //     build rather than shipping a literal {{key}}.
@@ -69,6 +69,7 @@ export function copySrc({ cssVersion } = {}) {
       url: SITE + pagePath,
       image: ogImages.has(slug) ? slug : "family",
       cssVersion,
+      year: String(new Date().getFullYear()),
     };
     let noindex = false;
 

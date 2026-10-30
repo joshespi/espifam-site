@@ -17,6 +17,11 @@ body[data-member="xander"] {
 [data-member="odin"]   { --accent: #facc15; }
 [data-member="family"] { --accent: #ef4444; }
 
+/* Text on an accent fill (.btn). Dark by default; white where dark text falls
+   below AA contrast on the accent (josh's red). */
+[data-member] { --accent-on: #0a0a0a; }
+[data-member="josh"] { --accent-on: #fff; }
+
 /* Accent used as text color: darkened in light theme for contrast. */
 [data-member] { --accent-ink: var(--accent); }
 html[data-theme="light"] [data-member] { --accent-ink: color-mix(in srgb, var(--accent) 75%, black); }
@@ -77,11 +82,17 @@ html[data-theme="light"] {
   .member-hero { @apply flex flex-col md:flex-row items-center md:items-start gap-8 py-8; }
   .member-hero-body { @apply flex-1 text-center md:text-left; }
 
+  /* py-2 grows the tap target to ~36px without changing the look. */
   .nav-link {
-    @apply text-zinc-400 hover:text-zinc-100 transition-colors no-underline text-sm font-medium;
+    @apply text-zinc-400 hover:text-zinc-100 transition-colors no-underline text-sm font-medium py-2;
   }
   .nav-link[aria-current="page"] { @apply text-zinc-100; }
-  .nav-brand { @apply text-zinc-100 text-base font-bold no-underline; }
+  .nav-brand { @apply text-zinc-100 text-lg font-extrabold tracking-tight no-underline py-2; }
+
+  /* Footer theme toggle: label names the theme it switches to. */
+  .theme-toggle .when-light { display: none; }
+  html[data-theme="light"] .theme-toggle .when-dark { display: none; }
+  html[data-theme="light"] .theme-toggle .when-light { display: inline; }
 
   .member-card,
   .link-card {
@@ -106,7 +117,7 @@ html[data-theme="light"] {
 
   .btn {
     background: var(--accent);
-    color: #0a0a0a;
+    color: var(--accent-on);
   }
   .btn:hover { filter: brightness(1.1); }
 
