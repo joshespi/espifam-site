@@ -29,26 +29,17 @@ fi
 NEW="${REMOTE_DIR}.new"
 PREV="${REMOTE_DIR}.prev"
 
-# One shared connection for the whole run; the second call reuses the first's
-# session instead of paying for another handshake.
-# %C hashes host/port/user and keeps the socket path well clear of the ~104-byte
-# sockaddr_un limit, which a long $TMPDIR can otherwise blow past.
-SSH=(ssh -o ControlMaster=auto -o "ControlPath=/tmp/espifam-%C" -o ControlPersist=30)
-trap '"${SSH[@]}" -O exit "$HOST" 2>/dev/null || true' EXIT
-
 npm run build
 
-tar -C public -cf - . | "${SSH[@]}" "$HOST" "
+# A single ssh connection does everything (one password prompt without a key):
+# extract the tarball from stdin, verify it, then swap. The swap only runs if
+# the extract and checks succeed, so a failed upload leaves the live site
+# untouched. No ControlMaster: it is unreliable under Git Bash on Windows.
+tar -C public -cf - . | ssh "$HOST" "
   set -e
   rm -rf -- '$NEW'
   mkdir -p -- '$NEW'
   tar -C '$NEW' -xf -
-"
-
-# Verify and swap on one connection, so a failed check can't leave the live
-# site replaced by a partial upload.
-"${SSH[@]}" "$HOST" "
-  set -e
   test -s '$NEW/index.html'
   test -s '$NEW/styles.css'
   rm -rf -- '$PREV'
