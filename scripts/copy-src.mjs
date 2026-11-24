@@ -4,8 +4,10 @@
 //   - renders each page, inlining <!--#include virtual="/partials/x.html" k="v" -->
 //     (recursively, so partials can include partials). In the partial,
 //     {{key}} is filled from the include's attributes plus the page vars: site,
-//     url, image (its og card in assets/og/, else "family"), year and cssVersion
-//     (content hash of styles.css, for cache busting). {{#if key}}...{{/if}}
+//     url, image (its og card in assets/og/, else "family"), year, the theme
+//     colors and cssVersion (content hash of styles.css, for cache busting).
+//     <!--#each-member virtual="/partials/x.html" --> renders a partial for
+//     each member in the roster. {{#if key}}...{{/if}}
 //     and {{#if !key}}...{{/if}} keep or drop a block. A missing key fails the
 //     build rather than shipping a literal {{key}}.
 //   - marks nav links to the current page with aria-current="page"
@@ -24,10 +26,20 @@ const SITE = "https://espifam.com";
 const EXCLUDED = new Set(["styles", "partials", "feed"]);
 const isExcluded = (rel) => EXCLUDED.has(rel.split(path.sep)[0]);
 
-const INCLUDE = /<!--#include virtual="([^"]+)"((?:\s+[\w-]+="[^"]*")*)\s*-->/g;
+const PARTIAL = /<!--#(include|each-member) virtual="([^"]+)"((?:\s+[\w-]+="[^"]*")*)\s*-->/g;
 const ATTR = /([\w-]+)="([^"]*)"/g;
 const IF_BLOCK = /\{\{#if (!?)(\w+)\}\}([\s\S]*?)\{\{\/if\}\}/g;
 const VAR = /\{\{(\w+)\}\}/g;
+
+function paperColor(css, theme) {
+  const match = css.match(new RegExp(`^[ \\t]*--paper-${theme}[ \\t]*:[ \\t]*(#[0-9a-fA-F]{6})[ \\t]*;`, "m"));
+  if (!match) throw new Error(`src/styles/input.css needs a six-digit hex color for --paper-${theme}`);
+  return match[1];
+}
+
+function escapeHtml(text) {
+  return text.replace(/[&<>"]/g, (char) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[char]);
+}
 
 function* htmlFiles(dir) {
   for (const entry of readdirSync(dir, { withFileTypes: true })) {
@@ -43,6 +55,15 @@ export function copySrc({ cssVersion } = {}) {
     .update(readFileSync(path.join(dest, "styles.css")))
     .digest("hex")
     .slice(0, 8);
+  const css = readFileSync(path.join(src, "styles", "input.css"), "utf8");
+  const darkThemeColor = paperColor(css, "dark");
+  const lightThemeColor = paperColor(css, "light");
+  const members = JSON.parse(readFileSync(path.join(src, "partials", "members.json"), "utf8")).map((member) => {
+    const fields = { ...member, shortName: member.shortName ?? member.name };
+    return Object.fromEntries(Object.entries(fields).map(([key, value]) => [
+      key, typeof value === "string" ? escapeHtml(value) : value,
+    ]));
+  });
 
   cpSync(src, dest, {
     recursive: true,
@@ -69,23 +90,34 @@ export function copySrc({ cssVersion } = {}) {
       url: SITE + pagePath,
       image: ogImages.has(slug) ? slug : "family",
       cssVersion,
+      darkThemeColor,
+      lightThemeColor,
       year: String(new Date().getFullYear()),
     };
     let noindex = false;
 
+    const renderPartial = (name, scope) => {
+      if (scope.noindex) noindex = true;
+      return render(
+        partial(name)
+          .replace(IF_BLOCK, (_, not, key, body) => (Boolean(scope[key]) !== Boolean(not) ? body : ""))
+          .replace(VAR, (_, key) => {
+            if (scope[key] === undefined) throw new Error(`${rel}: ${name} needs ${key}="..."`);
+            return scope[key];
+          }),
+        scope,
+      );
+    };
+
     const render = (text, scope) =>
-      text.replace(INCLUDE, (_, name, attrs) => {
+      text.replace(PARTIAL, (_, directive, name, attrs) => {
         const inner = { ...scope, ...Object.fromEntries([...attrs.matchAll(ATTR)].map((m) => [m[1], m[2]])) };
-        if (inner.noindex) noindex = true;
-        return render(
-          partial(name)
-            .replace(IF_BLOCK, (_, not, key, body) => (Boolean(inner[key]) !== Boolean(not) ? body : ""))
-            .replace(VAR, (_, key) => {
-              if (inner[key] === undefined) throw new Error(`${rel}: ${name} needs ${key}="..."`);
-              return inner[key];
-            }),
-          inner,
-        );
+        if (directive === "each-member") {
+          const clash = [...attrs.matchAll(ATTR)].map((m) => m[1]).find((key) => members.some((member) => key in member));
+          if (clash) throw new Error(`${rel}: ${name} attribute "${clash}" collides with a members.json field`);
+          return members.map((member) => renderPartial(name, { ...inner, ...member })).join("\n");
+        }
+        return renderPartial(name, inner);
       });
 
     const html = render(readFileSync(file, "utf8"), vars)

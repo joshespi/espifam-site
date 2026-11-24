@@ -1,0 +1,6 @@
+[
+  { "slug": "josh", "avatar": "josh", "role": "dad", "name": "Espi", "blurb": "gaming, building things" },
+  { "slug": "sarah", "avatar": "mom", "role": "mom", "name": "Skys", "blurb": "captain of this crew" },
+  { "slug": "xander", "avatar": "xander", "role": "younger son", "name": "xanderman_luigi", "shortName": "Xander", "blurb": "Luigi, gaming, streams incoming" },
+  { "slug": "odin", "avatar": "odin", "role": "oldest", "name": "Ode's", "blurb": "our heart" }
+]

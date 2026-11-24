@@ -31,7 +31,8 @@ function copy() {
 
 let timer;
 watch(src, { recursive: true }, (_, name) => {
-  if (name?.startsWith("styles")) return; // Tailwind's watcher handles CSS
+  // input.css also supplies the theme-color values baked into the HTML.
+  if (name?.startsWith("styles") && name !== path.join("styles", "input.css")) return;
   clearTimeout(timer);
   timer = setTimeout(copy, 100);
 });

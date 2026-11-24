@@ -89,17 +89,17 @@ function timeAgo(dateStr) {
 }
 
 function colMsg(text) {
-  return html`<p class="text-zinc-500 col-span-full text-sm">${text}</p>`;
+  return html`<p class="text-muted col-span-full text-sm">${text}</p>`;
 }
 
 function skeletons() {
   return Array(VIDEOS_PER_CHANNEL).fill(html`
     <div class="rounded-xl overflow-hidden motion-safe:animate-pulse">
-      <div class="bg-zinc-800 aspect-video w-full"></div>
+      <div class="bg-surface aspect-video w-full"></div>
       <div class="p-3 space-y-2">
-        <div class="bg-zinc-800 h-3 rounded w-full"></div>
-        <div class="bg-zinc-800 h-3 rounded w-3/4"></div>
-        <div class="bg-zinc-800 h-2 rounded w-1/3 mt-2"></div>
+        <div class="bg-surface h-3 rounded w-full"></div>
+        <div class="bg-surface h-3 rounded w-3/4"></div>
+        <div class="bg-surface h-2 rounded w-1/3 mt-2"></div>
       </div>
     </div>
   `);
@@ -111,13 +111,13 @@ function videoCards(items) {
       <a href="https://www.youtube.com/watch?v=${videoId}"
          target="_blank" rel="noopener noreferrer"
          class="rounded-xl overflow-hidden block no-underline group">
-        <div class="aspect-video overflow-hidden bg-zinc-800">
+        <div class="aspect-video overflow-hidden bg-surface">
           <img src="${thumb}" alt="" loading="lazy" width="320" height="180"
                class="w-full h-full object-cover transition duration-200 motion-safe:group-hover:scale-[1.04]" />
         </div>
         <div class="p-3">
-          <p class="font-semibold text-sm leading-snug text-zinc-100 line-clamp-2">${title}</p>
-          <p class="text-xs text-zinc-500 mt-1">${timeAgo(publishedAt)}</p>
+          <p class="font-semibold text-sm leading-snug text-ink line-clamp-2">${title}</p>
+          <p class="text-xs text-muted mt-1">${timeAgo(publishedAt)}</p>
         </div>
       </a>
     `)}`;
@@ -158,12 +158,12 @@ async function loadChannel(ch) {
 }
 
 function init() {
+  const container = document.getElementById('feed-container');
   if (!API_KEY) {
-    document.getElementById('feed-container').innerHTML =
-      '<p class="text-zinc-500 text-sm text-center">Set FEED_API_KEY in feed-config.js to load videos.</p>';
+    container.innerHTML =
+      '<p class="text-muted text-sm text-center">Set FEED_API_KEY in feed-config.js to load videos.</p>';
     return;
   }
-  const container = document.getElementById('feed-container');
   container.innerHTML = CHANNELS.map(channelSection).join('');
   CHANNELS.forEach(loadChannel);
 }

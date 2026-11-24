@@ -18,10 +18,7 @@
           <div class="console-frame">
             <div class="screen-label">Family select <span aria-hidden="true">▰ ▰ ▰</span></div>
             <nav class="player-grid" aria-label="Choose a family profile">
-              <a href="/josh/" aria-label="Espi"><img src="/assets/avatars/josh.webp" width="256" height="256" alt=""></a>
-              <a href="/sarah/" aria-label="Skys"><img src="/assets/avatars/mom.webp" width="256" height="256" alt=""></a>
-              <a href="/xander/" aria-label="Xander"><img src="/assets/avatars/xander.webp" width="256" height="256" alt=""></a>
-              <a href="/odin/" aria-label="Ode's"><img src="/assets/avatars/odin.webp" width="256" height="256" alt=""></a>
+              <!--#each-member virtual="/partials/player-tile.html" -->
             </nav>
           </div>
           <div class="controls" aria-hidden="true"><i class="dpad"></i><i class="speaker"></i><i class="game-buttons"></i></div>
@@ -31,10 +28,7 @@
     <section class="crew-section" aria-labelledby="crew-heading">
       <h2 id="crew-heading">The crew</h2>
       <div class="crew-grid">
-        <!--#include virtual="/partials/member-card.html" slug="josh" avatar="josh" role="dad" name="Espi" blurb="gaming, building things" -->
-        <!--#include virtual="/partials/member-card.html" slug="sarah" avatar="mom" role="mom" name="Skys" blurb="captain of this crew" -->
-        <!--#include virtual="/partials/member-card.html" slug="xander" avatar="xander" role="younger son" name="xanderman_luigi" blurb="Luigi, gaming, streams incoming" -->
-        <!--#include virtual="/partials/member-card.html" slug="odin" avatar="odin" role="oldest" name="Ode's" blurb="our heart" -->
+        <!--#each-member virtual="/partials/member-card.html" -->
       </div>
     </section>
     <section class="family-note">

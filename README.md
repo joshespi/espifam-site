@@ -29,12 +29,15 @@ fill the partial's `{{key}}` placeholders; a missing one fails the build.
 
 ```html
 <!--#include virtual="/partials/head.html" title="Espi · espifam" description="…" -->
-<!--#include virtual="/partials/member-card.html" slug="josh" avatar="josh" role="dad" name="Espi" blurb="…" -->
+<!--#each-member virtual="/partials/member-card.html" -->
 <!--#include virtual="/partials/thumb.html" src="/assets/avatars-ciw/espi" alt="…" caption="…" -->
 ```
 
 - `head.html` needs `title` and `description`. Add `noindex="true"` to keep a
   page out of search and the sitemap (the 404 page does this).
+- `#each-member` renders a partial once per entry in `src/partials/members.json`.
+  The roster supplies `slug`, `avatar`, `role`, `name`, and `blurb`. The portrait
+  links and main navigation use `shortName` when provided and `name` otherwise.
 - `thumb.html` expects `<src>-thumb.webp` (192px) next to `<src>.webp` (lightbox).
 - Partials can also use `{{site}}`, `{{url}}`, `{{image}}` and `{{cssVersion}}`,
   and `{{#if key}}…{{/if}}` / `{{#if !key}}…{{/if}}` blocks.
