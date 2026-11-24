@@ -1,10 +1,5 @@
 <a href="/{{slug}}/" class="member-card" data-member="{{slug}}">
-  <div class="flex items-center gap-5">
-    <div class="avatar"><img src="/assets/avatars/{{avatar}}.webp" width="256" height="256" alt="" /></div>
-    <div>
-      <div class="text-xs text-zinc-400 uppercase tracking-wider mb-1">{{role}}</div>
-      <div class="text-xl font-bold">{{name}}</div>
-      <div class="text-sm text-zinc-400">{{blurb}}</div>
-    </div>
-  </div>
+  <div class="card-top"><img src="/assets/avatars/{{avatar}}.webp" width="56" height="56" loading="lazy" decoding="async" alt=""><span>{{role}}</span></div>
+  <h3>{{name}}</h3>
+  <p>{{blurb}}</p>
 </a>

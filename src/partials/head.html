@@ -2,7 +2,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>{{title}}</title>
 <meta name="description" content="{{description}}" />
-<meta name="theme-color" content="#09090b" />
+<meta name="theme-color" content="#17192b" />
 {{#if noindex}}<meta name="robots" content="noindex" />{{/if}}
 <script>
   // Inline so the theme is applied before first paint (no dark-to-light flash).
@@ -12,7 +12,7 @@
     const themeColor = document.querySelector('meta[name="theme-color"]');
     const apply = (theme) => {
       root.dataset.theme = theme;
-      themeColor.content = theme === 'light' ? '#fafafa' : '#09090b';
+      themeColor.content = theme === 'light' ? '#f5f2fa' : '#17192b';
     };
 
     let theme;
